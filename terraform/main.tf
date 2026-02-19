@@ -18,8 +18,8 @@ resource "aws_s3_bucket" "app_bucket" {
 }
 
 resource "aws_iam_policy" "app_policy" {
-  name        = "app-full-access"
-  description = "Policy used by instances"
+  name        = "app-restricted-access"         # Changed name to reflect restricted access
+  description = "Policy with least privilege access for instances"
 
   policy = <<EOF
 {
@@ -27,7 +27,7 @@ resource "aws_iam_policy" "app_policy" {
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": [                               # Fixed: Replaced wildcard with specific required actions
+      "Action": [                              # Fixed: Replaced wildcard with specific actions
         "s3:GetObject",
         "s3:PutObject",
         "s3:ListBucket"
